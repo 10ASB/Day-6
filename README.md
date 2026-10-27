@@ -37,7 +37,7 @@ This repository records the actual Day 6 exercises: training and comparing KNN, 
 | `testing3.py` | SMS spam classification with CountVectorizer and Multinomial Naive Bayes |
 | `task1.ipynb` | Main notebook: model training, metrics, decision boundaries, tuning and SMS task |
 | `task2.ipynb` | Follow-up notebook: confusion matrix, sample-message predictions and tuning exercises |
-| `spam.csv` | SMS dataset used by the spam classification exercise |
+| `spam.csv` | Required input dataset; currently not committed to this repository, so add your supplied CSV locally before running the SMS task |
 
 ## Setup
 
@@ -60,7 +60,7 @@ Open `task1.ipynb` and `task2.ipynb` in Jupyter or Google Colab to run the noteb
 
 ## Notes
 
-- `testing3.py` expects the first two CSV columns to be the SMS label and message, like the supplied dataset. It reads using `encoding="latin-1"`.
-- The notebook's SMS section also needs `spam.csv` to be available in the notebook working directory. In Colab, upload the CSV or mount the appropriate drive folder first.
+- `testing3.py` expects `spam.csv` in the current working directory. It reads using `encoding="latin-1"` and uses the first two columns as label and message. The dataset file itself is not currently in this GitHub repository.
+- The notebook SMS sections need `spam.csv` to be available in the notebook working directory. Upload the dataset to Jupyter/Colab or place it beside the scripts before running the SMS task.
 - The synthetic dataset is for learning and plotting; its scores are not evidence of real-world performance.
 - For rigorous model evaluation, use a stratified split and fit preprocessing only on training data. The current scripts preserve the original exercise flow and can be improved in a later revision.
