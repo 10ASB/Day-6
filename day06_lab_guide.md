@@ -48,3 +48,15 @@ Using an SVM implementation such as scikit-learn for this comparison:
 - [ ] Tune k, C, and gamma and explain the observed changes.
 - [ ] Run the SMS-spam Naive Bayes experiment with CountVectorizer.
 - [ ] Commit the comparison table and written conclusions.
+
+
+## Completed lab implementation
+
+Run `day06_full_lab.py` to compare KNN, Gaussian Naive Bayes, and linear/RBF/polynomial SVM on a two-feature synthetic dataset. It prints accuracy, confusion matrices, classification reports, tunes KNN and SVM with 5-fold cross-validation, and saves decision-boundary plots.
+
+Install the additional lab dependencies:
+```bash
+python -m pip install numpy matplotlib scikit-learn pandas
+```
+
+For the SMS spam task, pass a CSV path to the script. The CSV must contain `label` and `message` columns; accepted labels include `spam` and `ham` (or `1` and `0`). CountVectorizer is fitted only on the training split to avoid text-data leakage.
