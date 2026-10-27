@@ -1,41 +1,66 @@
-# Day 6 — Distance & Margin Based Models: KNN, Naive Bayes, SVM
+# Day 6 — Distance & Margin-Based Models: KNN, Naive Bayes & SVM
 
 **AI/ML Internship · Week 2 · Day 6**
 
-This repository follows the Day 6 section of the 4-week AI/ML internship roadmap.
+This repository records the actual Day 6 exercises: training and comparing KNN, Gaussian Naive Bayes and an RBF SVM; plotting decision boundaries; tuning KNN and SVM hyperparameters; and applying Multinomial Naive Bayes to SMS spam messages.
 
-## Roadmap description
+## Tasks completed in the supplied work
 
-### Theory
-- **K-Nearest Neighbors (KNN):** distance metrics, choosing (k), the curse of dimensionality, and why feature scaling is important.
-- **Naive Bayes:** Bayes' theorem, the conditional-independence assumption, and Gaussian, Multinomial, and Bernoulli variants; common applications in text classification.
-- **Support Vector Machines (SVM):** maximum-margin classification, support vectors, soft margin (C), and the kernel trick (linear, RBF, and polynomial kernels), including gamma.
+### Task 1 — Train models and plot decision boundaries
+- Generate a two-feature classification dataset with `make_classification`.
+- Split it into training and test sets.
+- Train KNN (`k=5`), Gaussian Naive Bayes and an RBF-kernel SVM.
+- Compare test accuracy and visualize the three decision boundaries.
 
-### Hands-on lab
-- Train KNN, Naive Bayes, and SVM on the same dataset and compare results.
-- Plot decision boundaries using two features where applicable.
-- Tune KNN's (k), and SVM's (C) and (gamma); document the effect of each setting.
-- Apply Naive Bayes to an SMS spam dataset with CountVectorizer.
+### Task 2 — Hyperparameter tuning
+- Use five-fold `GridSearchCV` to compare KNN values `k = 1, 3, 5, 7, 9, 11`.
+- Tune the RBF SVM over `C = 0.1, 1, 10, 100` and `gamma = 0.01, 0.1, 1, 10`.
+- Print the best parameters, best cross-validation score and per-setting results.
 
-### Expected deliverable
-- This repository's Python exercises and a comparison table documenting model performance and parameter effects. The roadmap names the notebook deliverable `day06_knn_nb_svm.ipynb`.
+### Task 3 — SMS spam classification
+- Load `spam.csv`, map `ham` to 0 and `spam` to 1.
+- Split messages into training and test sets.
+- Fit `CountVectorizer` on training messages only and transform the test messages.
+- Train `MultinomialNB` and report accuracy and classification metrics.
+
+### Task 4 — Evaluation and prediction experiments
+- Inspect a confusion matrix.
+- Test the SMS classifier on example messages.
+- Re-run the KNN and SVM tuning exercises.
 
 ## Files
-- `day06_models.py` — educational NumPy implementations of KNN and Gaussian Naive Bayes, plus an example comparison on a synthetic dataset.
-- `day06_lab_guide.md` — lab tasks, tuning checklist, and SMS-spam instructions.\n- `day06_full_lab.py` — KNN/Naive Bayes/SVM comparison, KNN and SVM cross-validation tuning, decision-boundary plots, and optional SMS spam using CountVectorizer.
 
-## Run
-Install NumPy:
+| File | Purpose |
+|---|---|
+| `testing.py` | Model training, accuracy evaluation and decision-boundary visualization |
+| `testing2.py` | KNN and SVM hyperparameter tuning |
+| `testing3.py` | SMS spam classification with CountVectorizer and Multinomial Naive Bayes |
+| `task1.ipynb` | Main notebook: model training, metrics, decision boundaries, tuning and SMS task |
+| `task2.ipynb` | Follow-up notebook: confusion matrix, sample-message predictions and tuning exercises |
+| `spam.csv` | SMS dataset used by the spam classification exercise |
+
+## Setup
+
+Python 3.10+ recommended.
+
 ```bash
-python -m pip install numpy
-python day06_models.py
+python -m pip install numpy pandas matplotlib scikit-learn seaborn jupyter
 ```
 
-The NumPy starter code teaches the mechanics. The full lab script adds scikit-learn model comparisons, tuning, plots, and an optional SMS spam run. The SMS task requires a CSV with `label` and `message` columns; it is not run unless you supply that dataset.
+Run the scripts from the directory containing `spam.csv`:
 
-## Completion checklist
-- [ ] Train and compare KNN, Naive Bayes, and SVM on one dataset.
-- [ ] Plot decision boundaries on two features.
-- [ ] Tune (k), (C), and (gamma), recording their effects.
-- [ ] Run Naive Bayes on SMS spam using CountVectorizer.
-- [ ] Add a comparison table and written observations.
+```bash
+python testing.py
+python testing2.py
+python testing3.py
+jupyter notebook
+```
+
+Open `task1.ipynb` and `task2.ipynb` in Jupyter or Google Colab to run the notebook cells in order.
+
+## Notes
+
+- `testing3.py` expects the first two CSV columns to be the SMS label and message, like the supplied dataset. It reads using `encoding="latin-1"`.
+- The notebook's SMS section also needs `spam.csv` to be available in the notebook working directory. In Colab, upload the CSV or mount the appropriate drive folder first.
+- The synthetic dataset is for learning and plotting; its scores are not evidence of real-world performance.
+- For rigorous model evaluation, use a stratified split and fit preprocessing only on training data. The current scripts preserve the original exercise flow and can be improved in a later revision.
